@@ -24,6 +24,7 @@ int main() {
     int data[DATA_NUM];
     int i;
 
+    for(i=0; i<DATA_NUM; i++) data[i] = i;
     for(i=0; i<THREAD_NUM; i++) {
         targ[i].thread_no = i;
         targ[i].data = data;
