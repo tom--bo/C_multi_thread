@@ -23,7 +23,7 @@ void master_func(void *arg) {
 
 	for(i=2; i<DATA_NUM; i++) {
 		if(i%2!=0 || i==2) {
-			enquue(targ->next_q, i);
+			enqueue(targ->next_q, i);
 		}
 	}
 	enqueue(targ->next_q, END_DATA);
@@ -54,8 +54,8 @@ int main() {
 
 	pipeline_size = ((int)sqrt((double)DATA_NUM) +1) /2;
 	handle = (pthread_t *)malloc(pipeline_size * sizeof(pthread_t));
-	targ = (pthread_arg_t *) malloc(pipeline_size * sizeof(thread_arg_t));
-	queue = (queue_t *)malloc(pepeline_size * sizeof(queue_t));
+	targ = (thread_arg_t *) malloc(pipeline_size * sizeof(thread_arg_t));
+	queue = (queue_t *)malloc(pipeline_size * sizeof(queue_t));
 
 	for(i=0; i<pipeline_size; i++) {
 		queue[i].rp =queue[i].wp = 0;
@@ -71,7 +71,7 @@ int main() {
 	pthread_create(&handle[0], NULL, (void*)master_func, (void*)&targ[0]);
 
 	for(i=1; i<pipeline_size;i++) {
-		targ[i].dividre = i * 2 + 1;
+		targ[i].divider = i * 2 + 1;
 		targ[i].prev_q = &queue[i-1];
 		targ[i].next_q = &queue[i];
 		pthread_create(&handle[i], NULL, (void*)thread_func, (void*)&targ[i]);
@@ -80,7 +80,7 @@ int main() {
 	for(i=2; i<DATA_NUM+1; i++) {
 		int v;
 		dequeue(&queue[pipeline_size -1 ], &v);
-		if(v==END_DAT) break;
+		if(v==END_DATA) break;
 		printf("%d ", v);
 	}
 	printf("\n");
