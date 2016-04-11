@@ -6,7 +6,7 @@
 #include "queue.h"
 #include "timer.h"
 
-#define THREAD_NUM 3
+#define THREAD_NUM 5
 #define DATA_NUM 1000000
 #define MAX_QUEUE_NUM 10
 #define END_DATA -1

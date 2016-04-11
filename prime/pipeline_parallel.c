@@ -4,8 +4,9 @@
 #include <math.h>
 #include <pthread.h>
 #include "queue.h"
+#include "timer.h"
 
-#define DATA_NUM 1000
+#define DATA_NUM 1000000
 #define MAX_QUEUE_NUM 10
 #define END_DATA -1
 
@@ -48,6 +49,8 @@ void thread_func(void *arg) {
 
 int main() {
 	int i;
+	int t, time;
+	start_timer(&t);
 	int pipeline_size;
 	thread_arg_t *targ;
 	pthread_t *handle;
@@ -87,6 +90,8 @@ int main() {
 	free(queue);
 	free(targ);
 	free(handle);
+	time = stop_timer(&t);
+	print_timer(time);
 	return 0;
 }
 
