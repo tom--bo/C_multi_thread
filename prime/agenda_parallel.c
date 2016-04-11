@@ -4,6 +4,7 @@
 #include <math.h>
 #include <pthread.h>
 #include "queue.h"
+#include "timer.h"
 
 #define THREAD_NUM 3
 #define DATA_NUM 1000000
@@ -38,6 +39,8 @@ void thread_func(void *arg) {
 }
 
 int main() {
+	unsigned int t, time;
+	start_timer(&t);
 	pthread_t handle[THREAD_NUM];
 	thread_arg_t targ[THREAD_NUM];
 	bool primes[DATA_NUM];
@@ -76,6 +79,8 @@ int main() {
 		}
 	}
 	printf("\n");
+	time = stop_timer(&t);
+	print_timer(time);
 	return 0;
 }
 

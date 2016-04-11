@@ -1,7 +1,7 @@
 #ifndef _H_TIMER
 #define _H_TIMER
 #include <stdio.h>
-#include <sys/timer.h>
+#include <sys/time.h>
 
 inline
 unsigned long long gettimeval(void) {
@@ -23,9 +23,7 @@ unsigned int stop_timer(unsigned int *startt) {
 	return (stopt>=*startt)?(stopt-*startt):(stopt);
 }
 
-#define print_timer(te) {
-	printf("time of %s:%f[msec]|n", #te, te*1.0e-3);
-}
+#define print_timer(te) {printf("time of %s:%f[msec]\n", #te, te*1.0e-3);}
 
 #endif /*_H_TIMER */
 
